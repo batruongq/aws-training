@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "paths": {
+    "/employees": {
+      "name": "/employees",
+      "lambdaFunction": "awsamplifytrainingv1employeeapi",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/users": {
+      "name": "/users",
+      "lambdaFunction": "awsamplifytrainingv1userapi",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

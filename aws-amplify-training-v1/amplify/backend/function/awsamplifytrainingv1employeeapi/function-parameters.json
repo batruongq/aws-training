@@ -1,0 +1,25 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "dbUser",
+      "environmentVariableName": "DB_USER"
+    },
+    {
+      "cloudFormationParameterName": "dbPort",
+      "environmentVariableName": "DB_PORT"
+    },
+    {
+      "cloudFormationParameterName": "dbHost",
+      "environmentVariableName": "DB_HOST"
+    },
+    {
+      "cloudFormationParameterName": "dbPassword",
+      "environmentVariableName": "DB_PASSWORD"
+    },
+    {
+      "cloudFormationParameterName": "dbName",
+      "environmentVariableName": "DB_NAME"
+    }
+  ]
+}
