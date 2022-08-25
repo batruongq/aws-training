@@ -5,7 +5,8 @@ module.exports = {
   mode: 'development',
   entry: {
     'function/awsamplifytrainingv1employeeapi/src/index': path.resolve(__dirname, 'src/function/awsamplifytrainingv1employeeapi/index.ts'),
-    'function/awsamplifytrainingv1userapi/src/index': path.resolve(__dirname, 'src/function/awsamplifytrainingv1userapi/index.ts')
+    'function/awsamplifytrainingv1userapi/src/index': path.resolve(__dirname, 'src/function/awsamplifytrainingv1userapi/index.ts'),
+    'function/awsamplifytrainingv1584a4683PostConfirmation/src/custom': path.resolve(__dirname, 'src/function/awsamplifytrainingv1584a4683PostConfirmation/custom.ts')
   },
   target: 'node',
   module: {
