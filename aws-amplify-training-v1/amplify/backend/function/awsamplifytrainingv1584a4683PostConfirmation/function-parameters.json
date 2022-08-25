@@ -1,0 +1,39 @@
+{
+  "trigger": true,
+  "modules": [
+    "custom"
+  ],
+  "parentResource": "awsamplifytrainingv1584a4683",
+  "functionName": "awsamplifytrainingv1584a4683PostConfirmation",
+  "resourceName": "awsamplifytrainingv1584a4683PostConfirmation",
+  "parentStack": "auth",
+  "triggerEnvs": [],
+  "triggerDir": "/snapshot/repo/build/node_modules/@aws-amplify/amplify-category-auth/provider-utils/awscloudformation/triggers/PostConfirmation",
+  "triggerTemplate": "PostConfirmation.json.ejs",
+  "triggerEventPath": "PostConfirmation.event.json",
+  "roleName": "awsamplifytrainingv1584a4683PostConfirmation",
+  "skipEdit": true,
+  "enableCors": false,
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "dbHost",
+      "environmentVariableName": "DB_HOST"
+    },
+    {
+      "cloudFormationParameterName": "dbUser",
+      "environmentVariableName": "DB_USER"
+    },
+    {
+      "cloudFormationParameterName": "dbPort",
+      "environmentVariableName": "DB_PORT"
+    },
+    {
+      "cloudFormationParameterName": "dbPassword",
+      "environmentVariableName": "DB_PASSWORD"
+    },
+    {
+      "cloudFormationParameterName": "dbName",
+      "environmentVariableName": "DB_NAME"
+    }
+  ]
+}
