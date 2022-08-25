@@ -1,8 +1,9 @@
-const awsServerlessExpress = require('aws-serverless-express');
 import { Request, Response } from 'express';
 
 import client from '../../common/db';
 import app from '../../common/express';
+
+const awsServerlessExpress = require('aws-serverless-express');
 
 app.get('/employees', async function(req: Request, res: Response) {
   const queryParams = req.query
