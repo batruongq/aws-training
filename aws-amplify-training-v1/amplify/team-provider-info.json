@@ -9,13 +9,14 @@
       "UnauthRoleName": "amplify-awsamplifytrainingv1-dev-121214-unauthRole",
       "StackName": "amplify-awsamplifytrainingv1-dev-121214",
       "StackId": "arn:aws:cloudformation:us-east-1:475469545159:stack/amplify-awsamplifytrainingv1-dev-121214/0228a9a0-186b-11ed-932f-12b150602579",
-      "AmplifyAppId": "d3troci2hno9w1"
+      "AmplifyAppId": "d3troci2hno9w1",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-awsamplifytrainingv1-dev-121214-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "function": {
         "awsamplifytrainingv1employeeapi": {
           "deploymentBucketName": "amplify-awsamplifytrainingv1-dev-121214-deployment",
-          "s3Key": "amplify-builds/awsamplifytrainingv1employeeapi-4e767745387663787441-build.zip",
+          "s3Key": "amplify-builds/awsamplifytrainingv1employeeapi-4a6c4633346a62666c79-build.zip",
           "dbUser": "krclxzgk",
           "dbPort": "5432",
           "dbHost": "queenie.db.elephantsql.com",
@@ -24,7 +25,21 @@
         },
         "awsamplifytrainingv1userapi": {
           "deploymentBucketName": "amplify-awsamplifytrainingv1-dev-121214-deployment",
-          "s3Key": "amplify-builds/awsamplifytrainingv1userapi-676e4646446c7950564b-build.zip"
+          "s3Key": "amplify-builds/awsamplifytrainingv1userapi-47795563667465396a59-build.zip",
+          "dbHost": "queenie.db.elephantsql.com",
+          "dbUser": "krclxzgk",
+          "dbPort": "5432",
+          "dbPassword": "WdL01QuPvrAsA-475CIPGcH4D7naUO80",
+          "dbName": "krclxzgk"
+        },
+        "awsamplifytrainingv1584a4683PostConfirmation": {
+          "dbHost": "queenie.db.elephantsql.com",
+          "dbUser": "krclxzgk",
+          "dbPort": "5432",
+          "dbPassword": "WdL01QuPvrAsA-475CIPGcH4D7naUO80",
+          "dbName": "krclxzgk",
+          "deploymentBucketName": "amplify-awsamplifytrainingv1-dev-121214-deployment",
+          "s3Key": "amplify-builds/awsamplifytrainingv1584a4683PostConfirmation-464a302b744a636d7770-build.zip"
         }
       },
       "auth": {
