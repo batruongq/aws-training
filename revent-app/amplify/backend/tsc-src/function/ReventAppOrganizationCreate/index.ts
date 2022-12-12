@@ -1,66 +1,58 @@
 import {
   AppSyncIdentityCognito,
   AppSyncResolverEvent,
-  AppSyncResolverHandler
 } from 'aws-lambda';
-import { v4 as uuidv4 } from 'uuid';
-import { Organization, MutationCreateOrganizationArgs } from '@appsync';
+import {
+  Organization,
+  MutationCreateOrganizationArgs,
+  CreateOrganizationInput
+} from '@appsync';
 import {
   Message,
   LambdaResolverError,
   LambdaResolverErrorType,
   ddbDocClient,
-  handleError,
+  BaseCreateItemImpl,
+  ValidationRules
 } from '@app-core';
 
-export const handler: AppSyncResolverHandler<MutationCreateOrganizationArgs, Partial<Organization>> = 
-  async (event: AppSyncResolverEvent<MutationCreateOrganizationArgs, Record<string, any> | null>) => {
+type CreateOrgInput = CreateOrganizationInput & { userId: string; };
+
+export const handler = async (event: AppSyncResolverEvent<MutationCreateOrganizationArgs, Record<string, any> | null>) => {
   const userId: string = (event.identity as AppSyncIdentityCognito)?.claims?.sub;
   const { input } = event.arguments;
-  const date = new Date();
 
-  if (!input) {
-    throw new LambdaResolverError(LambdaResolverErrorType.BadRequest, Message.BadRequestError);
+  const duplicateValidator = async (item: CreateOrgInput) => {
+    try {
+      // Add item to validation table, this help prevent a user create organization duplicate name
+      await ddbDocClient.put({
+        TableName: process.env.API_REVENTAPPAPI_ORGANIZATIONVALIDATIONTABLE_NAME as string,
+        Item: {
+          userId: item.userId,
+          name: item.name,
+        },
+        ConditionExpression: 'attribute_not_exists(userId) AND attribute_not_exists(#name)',
+        ExpressionAttributeNames: { '#name': 'name'},
+      }).promise();
+    } catch(err) {
+      throw new LambdaResolverError(LambdaResolverErrorType.Duplicated, Message.Duplicated); 
+    }
   }
 
-  const { name, description } = input;
-
-  // Validation required fields
-  if (!name) {
-    throw new LambdaResolverError(LambdaResolverErrorType.BadRequest, Message.BadRequestError);
-  }
-
-  try {
-    // Add item to validation table, this help prevent a user create organization duplicate name
-    await ddbDocClient.put({
-      TableName: process.env.API_REVENTAPPAPI_ORGANIZATIONVALIDATIONTABLE_NAME as string,
-      Item: {
-        userId,
-        name,
-      },
-      ConditionExpression: 'attribute_not_exists(userId) AND attribute_not_exists(#name)',
-      ExpressionAttributeNames: { '#name': 'name'},
-    }).promise();
-
-    const dataInput: Partial<Organization> = {
-      id: uuidv4(),
+  const createItem = BaseCreateItemImpl.of<CreateOrgInput, Organization>({
+    tableName: process.env.API_REVENTAPPAPI_ORGANIZATIONVALIDATIONTABLE_NAME as string,
+    typeName: 'Organization',
+    item: {
+      ...input,
       userId,
-      name,
-      description,
-      createdAt: date.toISOString(),
-      updatedAt: date.toISOString(),
-    };
+    } as CreateOrgInput,
+    validationRules: {
+      name: [ValidationRules.REQUIRED]
+    },
+    customValidator: duplicateValidator
+  });
 
-    await ddbDocClient.put({
-      TableName: process.env.API_REVENTAPPAPI_ORGANIZATIONTABLE_NAME as string,
-      Item: {
-        ...dataInput,
-        '__typename': 'Organization',
-      },
-    }).promise();
+  const output = createItem.execute();
 
-    return dataInput;
-  } catch (error: any) {
-    handleError(error);
-  }
+  return output;
 };
