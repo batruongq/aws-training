@@ -1,0 +1,36 @@
+type Organization @model(mutations: null) @auth(rules: [
+  { allow: private, operations: [read, create] }
+  { allow: owner, operations: [update, delete], ownerField: "userId" }
+]){
+  id: ID!
+  name: String!
+  description: String
+  userId: ID! @index(name: "byUser" queryField: "listOrganizationsByUser")
+  user: User! @belongsTo(fields: ["userId"])
+  events: [Event] @hasMany
+  archived: Boolean
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+type OrganizationValidation @model(mutations: null, queries: null) @auth(rules: [
+  { allow: private, operations: [read, create]}
+]){
+  userId: String! @primaryKey(sortKeyFields: ["name"])
+  name: String! 
+}
+
+input CreateOrganizationInput {
+  name: String!
+  description: String
+}
+
+input UpdateOrganizationInput {
+  id: ID!
+  name: String!
+  description: String
+}
+
+input DeleteOrganizationInput {
+  id: ID!
+}

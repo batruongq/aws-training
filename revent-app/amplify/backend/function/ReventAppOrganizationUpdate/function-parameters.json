@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "storage": {
+      "Organization:@model(appsync)": [
+        "read",
+        "update"
+      ],
+      "OrganizationValidation:@model(appsync)": [
+        "create",
+        "read",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

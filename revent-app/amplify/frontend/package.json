@@ -1,0 +1,7 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@aws-sdk/client-cognito-identity": "^3.216.0",
+    "aws-amplify": "^5.0.4"
+  }
+}

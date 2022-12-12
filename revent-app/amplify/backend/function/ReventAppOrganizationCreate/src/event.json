@@ -1,0 +1,37 @@
+{
+  "typeName": "Mutation",
+  "fieldName": "createOrganization",
+  "arguments": { "input": { "name": "Org 2", "description": "Org Desc 2" } },
+  "identity": {
+    "claims": {
+      "sub": "f1993c85-377c-45ab-8058-a9e94db5247b",
+      "email_verified": true,
+      "iss": "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_bpWPl6CYo",
+      "cognito:username": "f1993c85-377c-45ab-8058-a9e94db5247b",
+      "origin_jti": "07407704-195a-4c40-8284-e470e4b0b682",
+      "aud": "2koahv5ifj8h2tna0alfqi932j",
+      "event_id": "c347a241-ebe0-4727-8234-95ea7078ec22",
+      "token_use": "id",
+      "auth_time": 1669795836,
+      "name": "Ba Truong",
+      "exp": 1669799436,
+      "iat": 1669795836,
+      "jti": "b1b87984-64af-4c3b-b373-88d0aa52773f",
+      "email": "thiba.t208@gmail.com"
+    },
+    "defaultAuthStrategy": "ALLOW",
+    "groups": null,
+    "issuer": "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_bpWPl6CYo",
+    "sourceIp": [ "113.176.195.117" ],
+    "sub": "f1993c85-377c-45ab-8058-a9e94db5247b",
+    "username": "f1993c85-377c-45ab-8058-a9e94db5247b"
+  },
+  "source": null,
+  "request": {
+    "headers": {
+      "authorization": "eyJraWQiOiJONFNYSU1nUTJUOFUyNU5vV1NQc2JJUjdrVjladWFFT0NmSFlTQ01Sb1dRPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJmMTk5M2M4NS0zNzdjLTQ1YWItODA1OC1hOWU5NGRiNTI0N2IiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLnVzLWVhc3QtMS5hbWF6b25hd3MuY29tXC91cy1lYXN0LTFfYnBXUGw2Q1lvIiwiY29nbml0bzp1c2VybmFtZSI6ImYxOTkzYzg1LTM3N2MtNDVhYi04MDU4LWE5ZTk0ZGI1MjQ3YiIsIm9yaWdpbl9qdGkiOiIwNzQwNzcwNC0xOTVhLTRjNDAtODI4NC1lNDcwZTRiMGI2ODIiLCJhdWQiOiIya29haHY1aWZqOGgydG5hMGFsZnFpOTMyaiIsImV2ZW50X2lkIjoiYzM0N2EyNDEtZWJlMC00NzI3LTgyMzQtOTVlYTcwNzhlYzIyIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE2Njk3OTU4MzYsIm5hbWUiOiJCYSBUcnVvbmciLCJleHAiOjE2Njk3OTk0MzYsImlhdCI6MTY2OTc5NTgzNiwianRpIjoiYjFiODc5ODQtNjRhZi00YzNiLWIzNzMtODhkMGFhNTI3NzNmIiwiZW1haWwiOiJ0aGliYS50MjA4QGdtYWlsLmNvbSJ9.2VIeIIfkie2uV4x5oc8yXe6jNzSvBE5bDTWdj7CtJp_DhJ4I60LkKSGgPiLrnOarJBPPynqHSBSZt2L18WjxWcM5iBv7SZ8daM6n_rxQyRuLdbIv3o_AWfewLqPy-XOuncQJpiJbHEVrycu0C30XBUoiUGDeJDpTBERtULyuzBlDvjUZN4trnhtDwDLQbFt9v3YQpviiNlluu4GrlcBbl3B7JgaDwye2QM_9E-kjjypKIAdkzAIHzTkT285S50hxR_CN2fvnLi7J52fa5Aax8BNlumxMTsU9T1VCfIOanY1IQSTkQlm5Z6CMn-thL8RkfchB1r2FI2bxeHprQIcpbQ",
+    },
+    "domainName": null
+  },
+  "prev": { "result": {} }
+}

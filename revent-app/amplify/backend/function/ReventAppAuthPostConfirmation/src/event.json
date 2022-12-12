@@ -1,0 +1,12 @@
+{
+  "request": {
+    "userPoolId": "testID",
+    "userName": "testUser",
+    "userAttributes": {
+      "sub": "test_01",
+      "name": "Test Name 01",
+      "email": "test01.gmail.com"
+    }
+  },
+  "response": {}
+}

@@ -1,0 +1,27 @@
+{
+  "description": "This app build for example dynamoDB, appsync, graphql",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "deploy": "npm run build && amplify push --y",
+    "codegen": "graphql-codegen"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.216.0",
+    "@types/uuid": "^9.0.0",
+    "aws-lambda": "^1.0.7",
+    "aws-sdk": "^2.1259.0",
+    "uuid": "^8.0.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^2.14.1",
+    "@graphql-codegen/typescript": "^2.8.2",
+    "@types/aws-lambda": "^8.10.109",
+    "@types/aws-sdk": "^2.7.0",
+    "glob": "^8.0.3",
+    "path": "^0.12.7",
+    "ts-loader": "^9.4.1",
+    "typescript": "^4.9.3",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.0"
+  }
+}

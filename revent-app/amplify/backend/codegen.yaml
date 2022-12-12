@@ -1,0 +1,24 @@
+overwrite: true
+schema:
+  - api/ReventAppApi/schema/event.graphql
+  - api/ReventAppApi/schema/user.graphql
+  - api/ReventAppApi/schema/organization.graphql
+  - api/ReventAppApi/schema/mutation.graphql
+  - appsync.graphql
+
+generates:
+  types/appsync.d.ts:
+    plugins:
+      - typescript
+
+config:
+  scalars:
+    AWSJSON: string
+    AWSDate: string
+    AWSTime: string
+    AWSDateTime: string
+    AWSTimestamp: number
+    AWSEmail: string
+    AWSURL: string
+    AWSPhone: string
+    AWSIPAddress: string

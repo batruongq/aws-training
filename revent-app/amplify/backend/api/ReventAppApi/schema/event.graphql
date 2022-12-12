@@ -1,0 +1,40 @@
+type Event @model(mutations: null) @auth(rules: [
+  { allow: private, operations: [read, create] }
+  { allow: owner, operations: [update, delete], ownerField: "userId" }
+]){
+  id: ID!
+  name: String!
+  description: String
+  start: AWSDateTime
+  end: AWSDateTime
+  meetingLink: String
+  organizationId: ID!
+  organization: Organization @belongsTo(fields: ["organizationId"])
+  userId: String!
+  archived: Boolean
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+input CreateEventInput {
+  organizationId: ID!
+  name: String!
+  description: String
+  start: AWSDateTime
+  end: AWSDateTime
+  meetingLink: String
+}
+
+input UpdateEventInput {
+  id: ID!
+  name: String!
+  description: String
+  start: AWSDateTime
+  end: AWSDateTime
+  meetingLink: String
+}
+
+input DeleteEventInput {
+  id: ID!
+}
+   

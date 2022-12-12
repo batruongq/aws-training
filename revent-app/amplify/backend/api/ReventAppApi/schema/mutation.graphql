@@ -1,0 +1,8 @@
+type Mutation {
+  createOrganization(input: CreateOrganizationInput): Organization @function(name: "ReventAppOrganizationCreate-${env}")
+  updateOrganization(input: UpdateOrganizationInput): Organization @function(name: "ReventAppOrganizationUpdate-${env}")
+  deleteOrganization(input: DeleteOrganizationInput): Organization @function(name: "ReventAppOrganizationDelete-${env}")
+  createEvent(input: CreateEventInput): Event @function(name: "ReventAppEventCreate-${env}")
+  updateEvent(input: UpdateEventInput): Event @function(name: "ReventAppEventUpdate-${env}")
+  deleteEvent(input: DeleteEventInput): Event
+}

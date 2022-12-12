@@ -1,0 +1,10 @@
+type User @model(mutations: null, subscriptions: null) @auth(rules: [
+  { allow: private }
+]) {
+  id: ID!
+  email: String!
+  name: String!
+  avatar: String
+  archived: Boolean
+  organizations: [Organization] @hasMany(indexName: "byUser", fields: ["id"])
+}

@@ -1,0 +1,63 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-reventapp-dev-144306-authRole",
+      "UnauthRoleArn": "arn:aws:iam::475469545159:role/amplify-reventapp-dev-144306-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::475469545159:role/amplify-reventapp-dev-144306-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-reventapp-dev-144306-deployment",
+      "UnauthRoleName": "amplify-reventapp-dev-144306-unauthRole",
+      "StackName": "amplify-reventapp-dev-144306",
+      "StackId": "arn:aws:cloudformation:us-east-1:475469545159:stack/amplify-reventapp-dev-144306/4ff6ae00-6a39-11ed-8c4f-128a19809aeb",
+      "AmplifyAppId": "d2awukzve6wzkn",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-reventapp-dev-144306-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "ReventAppAuth": {}
+      },
+      "function": {
+        "ReventAppAuthPostConfirmation": {
+          "deploymentBucketName": "amplify-reventapp-dev-144306-deployment",
+          "s3Key": "amplify-builds/ReventAppAuthPostConfirmation-4e676564326f4f676b41-build.zip",
+          "apiReventAppUserTableName": "User-rec4redup5ftdbirvxtejkn7si-dev"
+        },
+        "GraphQlLambdaAuthorizer": {
+          "deploymentBucketName": "amplify-reventapp-dev-144306-deployment",
+          "s3Key": "amplify-builds/GraphQlLambdaAuthorizer-76556c74486e6441584f-build.zip"
+        },
+        "ReventAppAuthPreSignup": {
+          "deploymentBucketName": "amplify-reventapp-dev-144306-deployment",
+          "s3Key": "amplify-builds/ReventAppAuthPreSignup-767a42527374764c776f-build.zip"
+        },
+        "ReventAppOrganizationCreate": {
+          "deploymentBucketName": "amplify-reventapp-dev-144306-deployment",
+          "s3Key": "amplify-builds/ReventAppOrganizationCreate-764b337447582f306e64-build.zip"
+        },
+        "ReventAppOrganizationDelete": {
+          "deploymentBucketName": "amplify-reventapp-dev-144306-deployment",
+          "s3Key": "amplify-builds/ReventAppOrganizationDelete-6246694b7768456a7973-build.zip"
+        },
+        "ReventAppOrganizationUpdate": {
+          "deploymentBucketName": "amplify-reventapp-dev-144306-deployment",
+          "s3Key": "amplify-builds/ReventAppOrganizationUpdate-72776f6f746866513163-build.zip"
+        },
+        "ReventAppEventCreate": {
+          "deploymentBucketName": "amplify-reventapp-dev-144306-deployment",
+          "s3Key": "amplify-builds/ReventAppEventCreate-70483947386a5a464551-build.zip"
+        },
+        "ReventAppEventUpdate": {
+          "deploymentBucketName": "amplify-reventapp-dev-144306-deployment",
+          "s3Key": "amplify-builds/ReventAppEventUpdate-41366843566b47742f6b-build.zip"
+        },
+        "ReventAppEventDelete": {
+          "deploymentBucketName": "amplify-reventapp-dev-144306-deployment",
+          "s3Key": "amplify-builds/ReventAppEventDelete-685a414a7a5a30397756-build.zip"
+        }
+      },
+      "api": {
+        "ReventAppApi": {}
+      }
+    }
+  }
+}
