@@ -18,13 +18,13 @@ import {
 
 type CreateOrgInput = CreateOrganizationInput & { userId: string; };
 
-export const handler = async (event: AppSyncResolverEvent<MutationCreateOrganizationArgs, Record<string, any> | null>) => {
+export const handler = async (event: AppSyncResolverEvent<MutationCreateOrganizationArgs, Organization>) => {
   const userId: string = (event.identity as AppSyncIdentityCognito)?.claims?.sub;
   const { input } = event.arguments;
 
+  // Prevent a user create organization duplicate name
   const duplicateValidator = async (item: CreateOrgInput) => {
     try {
-      // Add item to validation table, this help prevent a user create organization duplicate name
       await ddbDocClient.put({
         TableName: process.env.API_REVENTAPPAPI_ORGANIZATIONVALIDATIONTABLE_NAME as string,
         Item: {
@@ -52,7 +52,7 @@ export const handler = async (event: AppSyncResolverEvent<MutationCreateOrganiza
     customValidator: duplicateValidator
   });
 
-  const output = createItem.execute();
+  const output: Organization = await createItem.execute();
 
   return output;
 };
