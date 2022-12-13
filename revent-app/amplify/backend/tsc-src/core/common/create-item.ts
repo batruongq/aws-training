@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { LambdaResolverErrorType } from '../constant/error-type';
 import { Message } from '../constant/message';
+import { isEmpty } from '../helpers/is-empty';
 import { ddbDocClient } from './ddb-doc-client';
 import { LambdaResolverError } from './error';
 import { AttributeValidationMap, Validator } from './validator';
@@ -24,9 +25,9 @@ export class BaseCreateItemImpl {
 
         // Validate model if any
         if (validationRules) {
-          const isValid = new Validator().validate(item, validationRules);
+          const validationError = new Validator().validate(item, validationRules);
 
-          if (!isValid) {
+          if (!isEmpty(validationError)) {
             throw new LambdaResolverError(LambdaResolverErrorType.BadRequest, Message.BadRequestError);
           }
         }
@@ -44,7 +45,7 @@ export class BaseCreateItemImpl {
           createdAt: date.toISOString(),
           updatedAt: date.toISOString(),
         };
-        
+
         try {
           await ddbDocClient.put({
             TableName: tableName,

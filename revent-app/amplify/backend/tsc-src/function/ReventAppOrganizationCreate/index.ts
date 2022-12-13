@@ -40,7 +40,7 @@ export const handler = async (event: AppSyncResolverEvent<MutationCreateOrganiza
   }
 
   const createItem = BaseCreateItemImpl.of<CreateOrgInput, Organization>({
-    tableName: process.env.API_REVENTAPPAPI_ORGANIZATIONVALIDATIONTABLE_NAME as string,
+    tableName: process.env.API_REVENTAPPAPI_ORGANIZATIONTABLE_NAME as string,
     typeName: 'Organization',
     item: {
       ...input,
