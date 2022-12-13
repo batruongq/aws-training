@@ -1,75 +1,63 @@
 import {
   AppSyncIdentityCognito,
   AppSyncResolverEvent,
-  AppSyncResolverHandler
 } from 'aws-lambda';
-import { v4 as uuidv4 } from 'uuid';
-import { Event, MutationCreateEventArgs } from '@appsync';
+import { Event, CreateEventInput, MutationCreateEventArgs } from '@appsync';
 import {
   Message,
   LambdaResolverError,
   LambdaResolverErrorType,
   ddbDocClient,
-  isEmpty
+  isEmpty,
+  BaseCreateItemImpl,
+  ValidationRules
 } from '@app-core';
 
-export const handler: AppSyncResolverHandler<MutationCreateEventArgs, Partial<Event>> = 
-  async (event: AppSyncResolverEvent<MutationCreateEventArgs, Record<string, any> | null>) => {
+type CreateEventInputMap = CreateEventInput & { userId: string; };
+
+export const handler = async (event: AppSyncResolverEvent<MutationCreateEventArgs, Event>) => {
   const { input } = event.arguments;
   const userId: string = (event.identity as AppSyncIdentityCognito)?.claims?.sub;
-  const date = new Date();
 
-  if (!input) {
-    throw new LambdaResolverError(LambdaResolverErrorType.BadRequest, Message.BadRequestError);
-  }
-
-  const { organizationId, name, description, start, end, meetingLink } = input;
+  // Just owner of organization can create event for it
+  const isOwnerValidator = async (item: CreateEventInputMap) => {
+    try {
+      const organizationById = await ddbDocClient.get({
+        TableName: process.env.API_REVENTAPPAPI_ORGANIZATIONTABLE_NAME as string,
+        Key: {
+          id: item.organizationId,
+        }
+      }).promise();
   
-  if (!(organizationId && name)) {
-    throw new LambdaResolverError(LambdaResolverErrorType.BadRequest, Message.BadRequestError);
-  }
-
-  try {
-    // Just owner of organization can create event for it
-    const organizationById = await ddbDocClient.get({
-      TableName: process.env.API_REVENTAPPAPI_ORGANIZATIONTABLE_NAME as string,
-      Key: {
-        id: organizationId,
+      if (isEmpty(organizationById)) {
+        throw new LambdaResolverError(LambdaResolverErrorType.NotFound, Message.NotFound);
       }
-    }).promise();
-
-    if (isEmpty(organizationById)) {
-      throw new LambdaResolverError(LambdaResolverErrorType.NotFound, Message.NotFound);
+  
+      const ownerId: string = organizationById.Item?.userId;
+      
+      if (ownerId !== userId) {
+        throw new LambdaResolverError(LambdaResolverErrorType.Unauthorized, Message.Unauthorized);
+      }
+    } catch(err) {
+      throw new LambdaResolverError(LambdaResolverErrorType.InternalServerError, Message.InternalServerError); 
     }
-
-    const ownerId: string = organizationById.Item?.userId;
-    
-    if (ownerId !== userId) {
-      throw new LambdaResolverError(LambdaResolverErrorType.Unauthorized, Message.Unauthorized);
-    }
-
-    const dataInput: Partial<Event> = {
-      id: uuidv4(),
-      userId,
-      name,
-      description,
-      start,
-      end,
-      meetingLink,
-      createdAt: date.toISOString(),
-      updatedAt: date.toISOString(),
-    };
-
-    await ddbDocClient.put({
-      TableName: process.env.API_REVENTAPPAPI_EVENTTABLE_NAME as string,
-      Item: {
-        ...dataInput,
-        '__typename': 'Event',
-      },
-    }).promise();
-
-    return dataInput;
-  } catch (error) {
-    throw new LambdaResolverError(LambdaResolverErrorType.InternalServerError, Message.InternalServerError);
   }
+
+  const createItem = BaseCreateItemImpl.of<CreateEventInputMap, Event>({
+    tableName: process.env.API_REVENTAPPAPI_EVENTTABLE_NAME as string,
+    typeName: 'Event',
+    item: {
+      ...input,
+      userId,
+    } as CreateEventInputMap,
+    validationRules: {
+      organizationId: [ValidationRules.REQUIRED],
+      name: [ValidationRules.REQUIRED]
+    },
+    customValidator: isOwnerValidator
+  });
+
+  const output: Event = await createItem.execute();
+
+  return output;
 };
