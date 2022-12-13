@@ -1,6 +1,13 @@
 # OVERVIEW
 This amplify app implement Backend for Revent App
 
+## Tech stacks
+- Amplify
+- AppSync
+- GraphQL
+- Lambda
+- IAM
+  
 ## Development Guides
 List out the notes, steps, issues in process building app
 
@@ -29,6 +36,10 @@ Notes: The resource name could not be change, so be careful when init new one
 - Open project backend/api/ReventAppApi/schema
 - Run `amplify api gql-compile` to compile schema.graphql and view the compiled schema output in `backend/api/ReventAppApi/build/schema.graphql`
 - `amplify push`
+
+### Mock and run api locally
+- Run `amplify mock api`
+- Open Altair GraphQL Client Read setup [at](https://altairgraphql.dev/#download)
 
 ### Build and test lambda function locally
 - Add new function: `amplify add function`
